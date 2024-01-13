@@ -72,3 +72,6 @@
 {"level":"info","message":"server is listening at 8000..."}
 {"level":"info","message":"pid is 41700"}
 {"level":"info","message":"Connected to Mongodb"}
+{"level":"info","message":"server is listening at 8000..."}
+{"level":"info","message":"pid is 13744"}
+{"level":"info","message":"Connected to Mongodb"}
