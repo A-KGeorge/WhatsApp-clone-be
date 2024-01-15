@@ -1,6 +1,6 @@
 import createHttpError from "http-errors";
 import UserModel from "../models/userModel.js";
-import { sign } from "../utils/token.util.js";
+import { sign, verify } from "../utils/token.util.js";
 import bcrypt from "bcrypt";
 
 export const generateToken = async (payload, expiresIn, secret) => {
@@ -21,4 +21,9 @@ export const signUser = async (email, password) => {
   if (!passwordMatches) throw createHttpError.NotFound("Invalid credentials.");
 
   return user;
+};
+
+export const verifyToken = async (token, secret) => {
+  let check = await verify(token, secret);
+  return check;
 };
