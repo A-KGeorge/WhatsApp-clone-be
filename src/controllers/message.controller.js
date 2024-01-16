@@ -1,6 +1,7 @@
 import logger from "../configs/logger.config.js";
 import {
   createMessage,
+  getConvoMessages,
   populateMessage,
   updateLatestMessage,
 } from "../services/message.service.js";
@@ -31,7 +32,13 @@ export const sendMessage = async (req, res, next) => {
 
 export const getMessages = async (req, res, next) => {
   try {
-    res.send("get messages");
+    const convo_id = req.params.convo_id;
+    if (!convo_id) {
+      logger.error("Please add conversation id in params");
+      res.sendStatus(400);
+    }
+    const messages = await getConvoMessages(convo_id);
+    res.json(messages);
   } catch (error) {
     next(error);
   }
