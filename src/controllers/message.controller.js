@@ -9,7 +9,6 @@ import {
 export const sendMessage = async (req, res, next) => {
   try {
     const user_id = req.user.userId;
-    console.log(user_id);
     const { message, convo_id, files } = req.body;
     if (!convo_id || (!message && !files)) {
       logger.error("Please provide a conversation id and a message body.");
