@@ -22,6 +22,7 @@ export default function (socket, io) {
   socket.on("join conversation", (conversation) => {
     socket.join(conversation);
   });
+
   //send and receive a message
   socket.on("send message", (message) => {
     let conversation = message.conversation;
@@ -30,5 +31,13 @@ export default function (socket, io) {
       if (user._id === message._id) return;
       socket.in(user._id).emit("receive message", message);
     });
+  });
+
+  //typing
+  socket.on("typing", (conversation) => {
+    socket.in(conversation).emit("typing", conversation);
+  });
+  socket.on("stop typing", (conversation) => {
+    socket.in(conversation).emit("stop typing");
   });
 }
